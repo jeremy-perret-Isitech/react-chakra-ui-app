@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+#     - uses: actions/checkout@v3
+#     - name: Build the Docker image
+#       run: docker build . --file Dockerfile --tag denuvo-crack-api
+      
+    - uses: actions/checkout@v2
+      name: Check out code
+
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: kihak12/denuvo-crack-api
+        tags: v1, latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
