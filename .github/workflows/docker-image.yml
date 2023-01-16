@@ -21,8 +21,8 @@ jobs:
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:
-        image: kihak12/denuvo-crack-api
-        tags: v1, latest
+        image: kihak12/react-chakra-ui-app
+        tags: latest
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
