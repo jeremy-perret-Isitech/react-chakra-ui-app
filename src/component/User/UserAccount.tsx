@@ -9,6 +9,7 @@ import UserHistory from "./UserHistory";
 export interface IUserHistory {
     id: string;
     action: string;
+    newValue: string;
     date: Date;
 }
 const defaultValue: any[] = [];
@@ -16,9 +17,9 @@ export const UserContext = createContext(defaultValue);
 
 // Data for example
 const OTHER_USER_DATA: UserDetails = {
-    uid: "Other uid",
+    uid: "007",
     accessToken: "Access Token",
-    email: "another Email",
+    email: "another_mail@mail.com",
     emailVerified: false,
     createdAt: new Date("2016-11-08")
 }
@@ -60,10 +61,11 @@ const UserAccount = (props: any) => {
     const [storeUserData, dispatch] = useReducer(userAccountReducer, props.userData);
     const [userHistory, historyDispatch] = useReducer(userHistoryReducer, []);
 
-    const handleUserActionHistory = (action: string) => {
+    const handleUserActionHistory = (action: string, newValue: string) => {
         const userHistoryEvent: IUserHistory = {
             id: userHistory[userHistory.length + 1],
             action: action,
+            newValue: newValue,
             date: new Date()
         }
 
@@ -77,28 +79,28 @@ const UserAccount = (props: any) => {
         const newUid = (storeUserData.uid === OTHER_USER_DATA.uid ? userData.uid : OTHER_USER_DATA.uid)
         const reducerRequest: ReducerOption = { type: "MODIFY_USER_UID", payload: { uid: newUid } }
         dispatch(reducerRequest);
-        handleUserActionHistory('Changed uid')
+        handleUserActionHistory('Changed uid', newUid)
     }
 
     const changeUserMail = () => {
         const newEmail = (storeUserData.email === OTHER_USER_DATA.email ? userData.email : OTHER_USER_DATA.email)
         const reducerRequest: ReducerOption = { type: "MODIFY_USER_MAIL", payload: { email: newEmail } }
         dispatch(reducerRequest);
-        handleUserActionHistory('Changed mail')
+        handleUserActionHistory('Changed mail', newEmail)
     }
 
     const changeUserDate = () => {
         const newDate = (storeUserData.createdAt === OTHER_USER_DATA.createdAt ? userData.createdAt : OTHER_USER_DATA.createdAt)
         const reducerRequest: ReducerOption = { type: "MODIFY_USER_DATE", payload: { createdAt: newDate } }
         dispatch(reducerRequest);
-        handleUserActionHistory('Changed date')
+        handleUserActionHistory('Changed date', newDate.toDateString())
     }
 
     const changeUserDetail = () => {
         const newVerification = (storeUserData.emailVerified === OTHER_USER_DATA.emailVerified ? userData.emailVerified : OTHER_USER_DATA.emailVerified)
         const reducerRequest: ReducerOption = { type: "MODIFY_USER_VERIFICATION", payload: { emailVerified: newVerification } }
         dispatch(reducerRequest);
-        handleUserActionHistory('Changed mail verification')
+        handleUserActionHistory('Changed mail verification', newVerification ? "active" : "inactive")
     }
     return (
         <UserContext.Provider value={userHistory}>

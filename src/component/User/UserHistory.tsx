@@ -27,6 +27,12 @@ const UserHistory = () => {
                                 </ListItem>
                                 <ListItem>
                                     <Text as={'span'} fontWeight={'bold'}>
+                                        New value :
+                                    </Text>{' '}
+                                    {userAction.newValue}
+                                </ListItem>
+                                <ListItem>
+                                    <Text as={'span'} fontWeight={'bold'}>
                                         Action Date :
                                     </Text>{' '}
                                     {userAction.date.toDateString()}

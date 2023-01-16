@@ -7,6 +7,7 @@ const FireBaseAuthentication = () => {
 
 
   // Initialize Firebase Authentication and get a reference to the service
+  // email and password must be receive by form
   const auth = getAuth(app);
   const email = "test@test.test";
   const password = "testtest";
