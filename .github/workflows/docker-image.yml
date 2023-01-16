@@ -13,7 +13,7 @@ jobs:
     steps:
 #     - uses: actions/checkout@v3
 #     - name: Build the Docker image
-#       run: docker build . --file Dockerfile --tag denuvo-crack-api
+#       run: docker build . --file Dockerfile --tag react-chakra-ui-app
       
     - uses: actions/checkout@v2
       name: Check out code
